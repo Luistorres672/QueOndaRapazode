@@ -203,6 +203,10 @@
                 margin-bottom: 1rem; /* Espacio entre la ventana y el botón */
             }
         }
+        /* Estilos para asegurar que los botones del carrusel estén en la parte superior */
+        .carousel-button {
+            z-index: 10;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -419,10 +423,10 @@
                         </div>
 
                         <!-- Botones de navegación -->
-                        <button id="prevBtn" class="absolute top-1/2 left-4 -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 rounded-full focus:outline-none hover:bg-opacity-75 transition-colors">
+                        <button id="prevBtn" class="carousel-button absolute top-1/2 left-4 -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-3 rounded-full focus:outline-none hover:bg-opacity-75 transition-colors">
                             &#9664;
                         </button>
-                        <button id="nextBtn" class="absolute top-1/2 right-4 -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-2 rounded-full focus:outline-none hover:bg-opacity-75 transition-colors">
+                        <button id="nextBtn" class="carousel-button absolute top-1/2 right-4 -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-3 rounded-full focus:outline-none hover:bg-opacity-75 transition-colors">
                             &#9654;
                         </button>
                     </div>
@@ -793,3 +797,5 @@
     </script>
 </body>
 </html>
+
+
