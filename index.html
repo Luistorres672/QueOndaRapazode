@@ -719,7 +719,13 @@
                 let apiChatHistory = [{ role: "user", parts: [{ text: prompt }] }];
 
                 const payload = { contents: apiChatHistory };
-                const apiKey = "";
+                
+                // --------------------------------------------------------------------------------------------------------------------
+                // IMPORTANTE: DEBES PEGAR TU PROPIA CLAVE DE API EN EL LUGAR DE LAS COMILLAS ABAJO para que el chatbot funcione.
+                // Ve a Google AI Studio para obtenerla: https://aistudio.google.com/app/apikey
+                // --------------------------------------------------------------------------------------------------------------------
+                const apiKey = "AIzaSyBvZ5EtiBCnjM6EyOD-YOCAPpzGsYTMzgw";
+                
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
                 let retryCount = 0;
