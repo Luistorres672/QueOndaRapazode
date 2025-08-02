@@ -6,6 +6,8 @@
     <title>Qué Onda Rapaz - Refugio de Aves de Presa</title>
     <!-- Incluye Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Incluimos la última versión de Font Awesome para los íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb25W9oP50M6/J4V0b4Cj8D7Lw7E+L7+L7/v5+Lw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         /* Define la fuente Inter */
         body {
@@ -13,7 +15,7 @@
         }
         /* Estilos personalizados para el fondo del hero section */
         .hero-background {
-            /* Ruta de la imagen de fondo actualizada a la carpeta 'Imagenes' */
+            /* Ruta de la imagen de fondo */
             background-image: url('Imagenes/QRO1.jpeg');
             background-size: cover;
             background-position: center;
@@ -34,7 +36,173 @@
         .hidden-carousel-item {
             display: none;
         }
-        /* No se necesita .video-container para la etiqueta <video> */
+
+        /* --- ESTILOS PARA LAS SECCIONES DE EMBAJADORES Y EQUIPO --- */
+        .card-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border: 2px solid transparent; /* Borde transparente por defecto */
+        }
+        .card-effect:hover {
+            transform: translateY(-10px) scale(1.03); /* Efecto de "levantar" y agrandar */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #38a169; /* Borde verde al pasar el cursor */
+        }
+        .card-effect .card-image {
+            transition: border-color 0.3s ease-in-out;
+        }
+        .card-effect:hover .card-image {
+            border-color: #38a169; /* Borde verde en la imagen al pasar el cursor */
+        }
+        /* --- FIN DE ESTILOS DE EMBAJADORES Y EQUIPO --- */
+        
+        /* Estilos para los íconos de redes sociales */
+        .social-icon-wrapper {
+            width: 4rem; /* Ancho fijo para el círculo */
+            height: 4rem; /* Alto fijo para el círculo */
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+            border-radius: 9999px; /* Hace el fondo circular */
+            background-color: #e5e7eb; /* Color de fondo gris claro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .social-icon-wrapper:hover {
+            transform: scale(1.1); /* Agrandar al pasar el cursor */
+            background-color: #38a169; /* Fondo verde al pasar el cursor */
+        }
+        .social-icon-wrapper i {
+            font-size: 2.5rem; /* Tamaño del ícono */
+            color: #374151; /* Color del ícono gris oscuro */
+            transition: color 0.3s ease-in-out;
+        }
+        .social-icon-wrapper:hover i {
+            color: #ffffff; /* Color del ícono blanco al pasar el cursor */
+        }
+
+        /* Estilos del chatbot flotante simplificados */
+        #chatbot-container-wrapper {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000; /* Asegura que esté por encima de todos los demás elementos */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        #chatbot-toggle-btn {
+            width: 4rem;
+            height: 4rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease-in-out;
+        }
+        #chatbot-toggle-btn:hover {
+            transform: scale(1.1);
+        }
+        #chatbot-window {
+            height: 80vh;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            /* Ocultar y animar el chatbot */
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0);
+            transform-origin: bottom right; /* El origen de la transformación es la esquina inferior derecha */
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            margin-bottom: 1rem; /* Añade un pequeño espacio entre la ventana y el botón */
+        }
+        #chatbot-window.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+        .chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background-color: #f3f4f6;
+            /* Estilo para la barra de desplazamiento */
+            scrollbar-width: thin; /* Firefox */
+            scrollbar-color: #a0a0a0 #f3f4f6; /* Firefox */
+        }
+        .chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+        .chat-messages::-webkit-scrollbar-track {
+            background: #f3f4f6;
+            border-radius: 10px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb {
+            background-color: #a0a0a0;
+            border-radius: 10px;
+            border: 2px solid #f3f4e6;
+        }
+        .message {
+            max-width: 80%;
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+        }
+        .user-message {
+            background-color: #d1fae5;
+            align-self: flex-end;
+            margin-left: auto;
+            border-bottom-right-radius: 0;
+        }
+        .bot-message {
+            background-color: #fff;
+            align-self: flex-start;
+            margin-right: auto;
+            border-bottom-left-radius: 0;
+        }
+        /* Estilos del nuevo chatbot */
+        #chat-messages-new {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            background-color: #ffffff; /* Fondo blanco para los mensajes */
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem; /* Espacio entre mensajes */
+        }
+        .user-message-new {
+            background-color: #d1e7dd; /* Un verde suave */
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            align-self: flex-end;
+            max-width: 80%;
+            margin-left: auto;
+        }
+        .bot-message-new {
+            background-color: #f0f2f5; /* Un gris claro */
+            padding: 0.5rem 1rem;
+            border-radius: 1rem;
+            align-self: flex-start;
+            max-width: 80%;
+            margin-right: auto;
+        }
+        .loading-indicator {
+            padding: 0.5rem 1rem;
+            color: #6b7280;
+            font-style: italic;
+        }
+        /* Adaptación para móviles */
+        @media (max-width: 640px) {
+            #chatbot-container-wrapper {
+                bottom: 1rem;
+                right: 1rem;
+            }
+            #chatbot-window {
+                height: 70vh;
+                max-width: none;
+                width: calc(100vw - 2rem); /* Ocupa casi todo el ancho de la pantalla */
+                margin-bottom: 1rem; /* Espacio entre la ventana y el botón */
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -44,15 +212,17 @@
         <div class="container mx-auto flex justify-between items-center flex-wrap">
             <!-- Logo de la esquina superior izquierda -->
             <a href="#" class="rounded-full overflow-hidden p-1 hover:bg-green-100 transition-colors">
-                <!-- Ruta de la imagen del logo actualizada a la carpeta 'Imagenes' -->
+                <!-- Ruta de la imagen del logo -->
                 <img src="Imagenes/QROLogo1.jpg" alt="Logo Qué Onda Rapaz" class="h-12 w-12 object-contain rounded-full border-2 border-green-700" onerror="this.onerror=null; this.src='https://placehold.co/50x50/A0D468/ffffff?text=Logo+QOR';">
             </a>
             <div class="flex flex-wrap space-x-4 mt-4 md:mt-0">
                 <a href="#inicio" class="text-[#64735c] hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Inicio</a>
                 <a href="#quienes-somos" class="text-[#64735c] hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Quiénes Somos</a>
                 <a href="#equipo" class="text-[#64735c] hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Nuestro Equipo</a>
+                <a href="#embajadores" class="text-[#64735c] hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Embajadores</a>
                 <a href="#areas" class="text-[#64735c] hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Áreas del Refugio</a>
                 <a href="#dia-a-dia" class="text-[#64735c] hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Día a Día</a>
+                <a href="#contacto" class="text-[#64735c] hover:text-green-700 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contacto</a>
             </div>
         </div>
     </nav>
@@ -62,7 +232,7 @@
         <div class="absolute inset-0 bg-black opacity-50 rounded-lg"></div>
         <div class="relative z-10 p-6 bg-white bg-opacity-20 rounded-lg shadow-xl backdrop-blur-sm">
             <!-- Título "QUÉ ONDA RAPAZ" reemplazado por una imagen del logo -->
-            <!-- Ruta de la imagen del logo actualizada a la carpeta 'Imagenes' -->
+            <!-- Ruta de la imagen del logo -->
             <img src="Imagenes/QROLogo2.png" alt="Logo Qué Onda Rapaz" class="w-48 sm:w-64 md:w-80 h-auto mx-auto mb-4 drop-shadow-lg" onerror="this.onerror=null; this.src='https://placehold.co/300x150/A0D468/ffffff?text=Logo+QOR';">
             <p class="text-xl sm:text-2xl font-light italic mb-6">"El ser humano no ha tejido la red de la vida, somos solo un hilo dentro de ella, cualquier cosa que hagamos a la red, nos lo hacemos a nosotros mismos. Todo está enlazado, todo está conectado."</p>
             <p class="text-lg sm:text-xl font-medium">- Jefe Indio Seattle</p>
@@ -78,7 +248,7 @@
             <h2 class="text-4xl font-bold text-green-800 mb-10 border-b-4 border-green-600 pb-2 inline-block">¿Quiénes Somos?</h2>
             <div class="flex flex-col md:flex-row items-center justify-center gap-8 bg-white p-8 rounded-xl shadow-2xl">
                 <div class="md:w-1/2">
-                    <!-- Imagen de "¿Quiénes Somos?" actualizada a la carpeta 'Imagenes' -->
+                    <!-- Imagen de "¿Quiénes Somos?" -->
                     <img src="Imagenes/QRO2.jpeg" alt="Mujer con ave rapaz" class="rounded-xl shadow-lg w-full h-auto object-cover transform transition-transform duration-500 hover:scale-105" onerror="this.onerror=null; this.src='https://placehold.co/600x400/8BC34A/ffffff?text=Mujer+con+Ave+Rapaz';">
                 </div>
                 <div class="md:w-1/2 text-left">
@@ -102,50 +272,50 @@
             <h2 class="text-4xl font-bold text-green-800 mb-10 border-b-4 border-green-600 pb-2 inline-block">Nuestro Equipo</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Presidente -->
-                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform transition-transform duration-300 hover:scale-105">
-                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Carlos" alt="Carlos Enrique Hernandez Vazquez" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover">
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center card-effect">
+                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Carlos" alt="Carlos Enrique Hernandez Vazquez" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover card-image">
                     <h3 class="text-xl font-semibold text-gray-900">Carlos Enrique Hernandez Vazquez</h3>
                     <p class="text-green-700 font-medium">Presidente</p>
                 </div>
                 <!-- Vice Presidente -->
-                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform transition-transform duration-300 hover:scale-105">
-                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Enrique" alt="Enrique Martin Hernandez Diaz" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover">
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center card-effect">
+                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Enrique" alt="Enrique Martin Hernandez Diaz" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover card-image">
                     <h3 class="text-xl font-semibold text-gray-900">Enrique Martin Hernandez Diaz</h3>
                     <p class="text-green-700 font-medium">Vice Presidente</p>
                 </div>
                 <!-- Tesorera -->
-                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform transition-transform duration-300 hover:scale-105">
-                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Estrella" alt="Estrella Karina Hernandez Vazquez" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover">
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center card-effect">
+                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Estrella" alt="Estrella Karina Hernandez Vazquez" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover card-image">
                     <h3 class="text-xl font-semibold text-gray-900">Estrella Karina Hernandez Vazquez</h3>
                     <p class="text-green-700 font-medium">Tesorera</p>
                 </div>
                 <!-- Coordinación de Vinculación Académica -->
-                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform transition-transform duration-300 hover:scale-105">
-                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Mariana" alt="Mariana Aguirre Trejo" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover">
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center card-effect">
+                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Mariana" alt="Mariana Aguirre Trejo" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover card-image">
                     <h3 class="text-xl font-semibold text-gray-900">Mariana Aguirre Trejo</h3>
                     <p class="text-green-700 font-medium">Coordinación de Vinculación Académica</p>
                 </div>
                 <!-- Coordinación de Operación -->
-                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform transition-transform duration-300 hover:scale-105">
-                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Elena" alt="Elena Avila Salinas" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover">
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center card-effect">
+                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Elena" alt="Elena Avila Salinas" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover card-image">
                     <h3 class="text-xl font-semibold text-gray-900">Elena Avila Salinas</h3>
                     <p class="text-green-700 font-medium">Coordinación de Operación</p>
                 </div>
                 <!-- Coordinación de Mariposario -->
-                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform transition-transform duration-300 hover:scale-105">
-                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Karla" alt="Karla Balderas Perez" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover">
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center card-effect">
+                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Karla" alt="Karla Balderas Perez" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover card-image">
                     <h3 class="text-xl font-semibold text-gray-900">Karla Balderas Perez</h3>
                     <p class="text-green-700 font-medium">Coordinación de Mariposario</p>
                 </div>
                 <!-- Coordinación de Educación Ambiental -->
-                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform transition-transform duration-300 hover:scale-105">
-                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Perla" alt="Perla Tenorio Escandon" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover">
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center card-effect">
+                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Perla" alt="Perla Tenorio Escandon" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover card-image">
                     <h3 class="text-xl font-semibold text-gray-900">Perla Tenorio Escandon</h3>
                     <p class="text-green-700 font-medium">Coordinación de Educación Ambiental</p>
                 </div>
                 <!-- Coordinación Digitalización y Sistemas -->
-                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center transform transition-transform duration-300 hover:scale-105">
-                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Luis" alt="Luis Torres Enriquez" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover">
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center card-effect">
+                    <img src="https://placehold.co/150x150/689F38/ffffff?text=Luis" alt="Luis Torres Enriquez" class="w-32 h-32 rounded-full mb-4 border-4 border-green-500 object-cover card-image">
                     <h3 class="text-xl font-semibold text-gray-900">Luis Torres Enriquez</h3>
                     <p class="text-green-700 font-medium">Coordinación Digitalización y Sistemas</p>
                 </div>
@@ -153,47 +323,80 @@
         </div>
     </section>
 
+    <!-- Sección Conoce a Nuestros Embajadores -->
+    <section id="embajadores" class="py-16 bg-gradient-to-br from-green-50 to-green-100 p-4">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold text-green-800 mb-10 border-b-4 border-green-600 pb-2 inline-block">Conoce a Nuestros Embajadores</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Shadow (Aguililla de Harris) -->
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center card-effect">
+                    <img src="Imagenes/QRO7.jpeg" alt="Shadow, un Aguililla de Harris" class="w-40 h-40 rounded-full mb-4 border-4 border-green-300 object-cover card-image" onerror="this.onerror=null; this.src='https://placehold.co/150x150/4CAF50/ffffff?text=Imagen+no+encontrada';">
+                    <h3 class="text-2xl font-bold text-gray-900">Shadow</h3>
+                    <p class="text-green-700 font-medium mt-1">Un aguililla de harris</p>
+                    <p class="text-sm text-gray-600 mt-4 leading-relaxed">La Aguililla de Harris es conocida por su comportamiento de caza cooperativa, trabajando en grupos familiares para atrapar a sus presas. Son aves sociales y muy inteligentes.</p>
+                </div>
+                <!-- Arquímedes (Búho Virginiano) -->
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center card-effect">
+                    <img src="Imagenes/QRO8.jpeg" alt="Arquímedes, un Búho Virginiano" class="w-40 h-40 rounded-full mb-4 border-4 border-green-300 object-cover card-image" onerror="this.onerror=null; this.src='https://placehold.co/150x150/8BC34A/ffffff?text=Imagen+no+encontrada';">
+                    <h3 class="text-2xl font-bold text-gray-900">Arquímedes</h3>
+                    <p class="text-green-700 font-medium mt-1">Un Búho virginiano</p>
+                    <p class="text-sm text-gray-600 mt-4 leading-relaxed">El Búho Virginiano es uno de los búhos más grandes y poderosos de América, caracterizado por sus distintivos "cuernos" o penachos de plumas. Es un depredador ágil y silencioso.</p>
+                </div>
+                <!-- Ágatha (Corvus Corax) -->
+                <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center card-effect">
+                    <img src="Imagenes/QRO9.jpeg" alt="Ágatha, un Corvus Corax" class="w-40 h-40 rounded-full mb-4 border-4 border-green-300 object-cover card-image" onerror="this.onerror=null; this.src='https://placehold.co/150x150/CDDC39/ffffff?text=Imagen+no+encontrada';">
+                    <h3 class="text-2xl font-bold text-gray-900">Ágatha</h3>
+                    <p class="text-green-700 font-medium mt-1">una corvus corax</p>
+                    <p class="text-sm text-gray-600 mt-4 leading-relaxed">El Corvus Corax, o cuervo común, es conocido por su notable inteligencia y habilidades de resolución de problemas. Es un ave social y comunicativa, símbolo de sabiduría en muchas culturas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Áreas del Refugio Section -->
-    <section id="areas" class="py-16 bg-gradient-to-br from-green-100 to-green-200 p-4">
+    <section id="areas" class="py-16 bg-gray-50 p-4">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl font-bold text-green-800 mb-10 border-b-4 border-green-600 pb-2 inline-block">Áreas del Refugio</h2>
+            <p class="text-lg leading-relaxed text-gray-700 mb-8 max-w-3xl mx-auto">
+                Nuestro refugio está dividido en áreas especializadas para el cuidado y rehabilitación de las aves. Cada espacio tiene una función vital para garantizar el bienestar y la recuperación de nuestros ejemplares.
+            </p>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Aldea -->
                 <div class="bg-white rounded-xl shadow-xl p-6 flex flex-col items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                     <span class="text-5xl mb-4">🏠</span>
                     <h3 class="text-2xl font-bold text-green-700 mb-3">Aldea</h3>
-                    <p class="text-lg text-gray-700">Espacio de entrada y bienvenida para visitantes, centro de operaciones.</p>
+                    <p class="text-lg text-gray-700">Es la zona de bienvenida para los visitantes. Aquí se centralizan las actividades de recepción, información y gestión administrativa del refugio. Es el punto de partida para cualquier recorrido.</p>
                 </div>
                 <!-- Cueva -->
                 <div class="bg-white rounded-xl shadow-xl p-6 flex flex-col items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                     <span class="text-5xl mb-4">🕳️</span>
                     <h3 class="text-2xl font-bold text-green-700 mb-3">Cueva</h3>
-                    <p class="text-lg text-gray-700">Área de descanso o refugio para ciertas especies.</p>
+                    <p class="text-lg text-gray-700">Un espacio de descanso y tranquilidad. Diseñada para especies que requieren un ambiente más oscuro y seguro, esta área simula un refugio natural para reducir el estrés de las aves.</p>
                 </div>
                 <!-- Voladeros -->
                 <div class="bg-white rounded-xl shadow-xl p-6 flex flex-col items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                     <span class="text-5xl mb-4">🦅</span>
                     <h3 class="text-2xl font-bold text-green-700 mb-3">Voladeros</h3>
-                    <p class="text-lg text-gray-700">Amplios espacios para que las aves rapaces puedan ejercitarse y volar libremente.</p>
+                    <p class="text-lg text-gray-700">Espacios amplios y controlados donde las aves rapaces pueden ejercitar sus alas, recuperar la fuerza muscular y practicar el vuelo, preparándose para su eventual liberación.</p>
                 </div>
                 <!-- Clínica -->
                 <div class="bg-white rounded-xl shadow-xl p-6 flex flex-col items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                     <span class="text-5xl mb-4">🏥</span>
                     <h3 class="text-2xl font-bold text-green-700 mb-3">Clínica</h3>
-                    <p class="text-lg text-gray-700">Zona de cuidado y rehabilitación para aves heridas o enfermas.</p>
+                    <p class="text-lg text-gray-700">El corazón médico del refugio. Aquí se brinda atención veterinaria especializada, se realizan curaciones y se monitorea la salud de cada ave desde su llegada hasta su recuperación total.</p>
                 </div>
                 <!-- Mariposario -->
                 <div class="bg-white rounded-xl shadow-xl p-6 flex flex-col items-center transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                     <span class="text-5xl mb-4">🦋</span>
                     <h3 class="text-2xl font-bold text-green-700 mb-3">Mariposario</h3>
-                    <p class="text-lg text-gray-700">Espacio dedicado a la conservación de mariposas, complementando el ecosistema.</p>
+                    <p class="text-lg text-gray-700">Este espacio no solo protege a las mariposas, sino que también contribuye a la biodiversidad local, educando a los visitantes sobre la importancia de los polinizadores y la interconexión de los ecosistemas.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Un Día en el Refugio Section -->
-    <section id="dia-a-dia" class="py-16 bg-gray-50 p-4">
+    <section id="dia-a-dia" class="py-16 bg-gradient-to-br from-green-50 to-green-100 p-4">
         <div class="container mx-auto text-center">
             <h2 class="text-4xl font-bold text-green-800 mb-10 border-b-4 border-green-600 pb-2 inline-block">Un Día en el Refugio</h2>
             <div class="flex flex-col md:flex-row items-center justify-center gap-8 bg-white p-8 rounded-xl shadow-2xl">
@@ -237,12 +440,59 @@
                 </div>
             </div>
             <div class="mt-12">
-                <!-- Ruta de la imagen del Gran Búho actualizada a la carpeta 'Imagenes' -->
+                <!-- Ruta de la imagen del Gran Búho -->
                 <img src="Imagenes/478554424_633121719226689_6966033052429717508_n.jpg" alt="Gran Búho" class="rounded-xl shadow-lg mx-auto w-3/4 md:w-1/2 lg:w-1/3 object-cover transform transition-transform duration-500 hover:scale-105">
                 <!-- Texto "¡Estamos Unidos por Plumas!" hecho más grande con 'text-2xl' -->
                 <p class="text-2xl font-bold text-green-800 mt-6">
                     ¡Estamos Unidos por Plumas!
                 </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section (Nueva) -->
+    <section id="contacto" class="py-16 bg-gray-50 p-4">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold text-green-800 mb-10 border-b-4 border-green-600 pb-2 inline-block">Contacto</h2>
+            <div class="bg-white p-8 rounded-xl shadow-2xl max-w-3xl mx-auto">
+                <p class="text-lg leading-relaxed text-gray-700 mb-6">
+                    Puedes contactarnos a través de nuestras redes sociales, correo electrónico o visitando nuestro refugio.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center space-y-6 sm:space-y-0 sm:space-x-8 mb-8">
+                    <!-- Redes Sociales -->
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-green-700 mb-3">Redes Sociales</h3>
+                        <div class="flex space-x-6 justify-center">
+                            <!-- Enlace para Facebook -->
+                            <a href="https://www.facebook.com/queondarapaz?locale=es_LA" target="_blank" rel="noopener noreferrer" class="social-icon-wrapper">
+                                <i class="fab fa-facebook fa-2x text-blue-600"></i>
+                            </a>
+                            <!-- Enlace para Instagram -->
+                            <a href="https://www.instagram.com/queondarapaz/?hl=es" target="_blank" rel="noopener noreferrer" class="social-icon-wrapper">
+                                <i class="fab fa-instagram fa-2x text-pink-600"></i>
+                            </a>
+                            <!-- Enlace para TikTok -->
+                            <a href="https://www.tiktok.com/@queondarapaz?lang=es" target="_blank" rel="noopener noreferrer" class="social-icon-wrapper">
+                                <i class="fa-brands fa-tiktok fa-2x text-black"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Dirección de Correo -->
+                    <div class="text-center">
+                        <h3 class="text-2xl font-bold text-green-700 mb-3">Correo Electrónico</h3>
+                        <p class="text-lg text-gray-700">
+                            <a href="mailto:direccion@que-onda-rapaz.com" class="text-blue-600 hover:underline">direccion@que-onda-rapaz.com</a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Dirección Física -->
+                <div class="mt-8 text-center">
+                    <h3 class="text-2xl font-bold text-green-700 mb-3">Dirección del Refugio</h3>
+                    <p class="text-lg text-gray-700">
+                        Av del Desierto #995 Col. Capulines<br>
+                        San Luis Potosí
+                    </p>
+                </div>
             </div>
         </div>
     </section>
@@ -253,39 +503,75 @@
             <p class="text-lg">&copy; 2025 Qué Onda Rapaz. Todos los derechos reservados.</p>
             <p class="text-sm mt-2">Refugio de Aves de Presa.</p>
             <div class="flex justify-center space-x-4 mt-4">
+                <a href="#contacto" class="text-gray-400 hover:text-white transition-colors">Contacto</a>
                 <a href="#" class="text-gray-400 hover:text-white transition-colors">Política de Privacidad</a>
                 <a href="#" class="text-gray-400 hover:text-white transition-colors">Términos de Servicio</a>
             </div>
         </div>
-    </section>
+    </footer>
+
+    <!-- Contenedor del chatbot flotante (nuevo) -->
+    <div id="chatbot-container-wrapper">
+        <!-- Ventana del chatbot -->
+        <div id="chatbot-window" class="bg-white">
+            <header class="bg-green-600 text-white p-4 text-center rounded-t-lg flex justify-between items-center">
+                <h1 class="text-xl font-bold">Chatbot de Qué Onda Rapaz</h1>
+                <button id="close-chatbot-btn" class="text-white hover:text-gray-200 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </header>
+            
+            <div id="chat-messages-new" class="chat-messages flex flex-col space-y-2">
+                <div class="bg-gray-300 text-gray-800 p-3 rounded-xl self-start max-w-xs md:max-w-sm">
+                    <p>¡Hola! Soy un chatbot para el refugio de aves "Qué Onda Rapaz". Estoy aquí para responder a tus preguntas sobre la fundación, nuestro equipo, los embajadores o cómo contactarnos. ¿En qué puedo ayudarte?</p>
+                </div>
+            </div>
+    
+            <div class="p-4 bg-gray-200 rounded-b-xl flex space-x-2">
+                <input type="text" id="user-input-new" class="flex-grow p-3 rounded-full border-2 border-gray-300 focus:outline-none focus:border-blue-500" placeholder="Escribe un mensaje..." autocomplete="off">
+                <button id="send-button-new" class="bg-green-600 text-white p-3 rounded-full hover:bg-green-700 transition-colors duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Botón para alternar el chatbot -->
+        <button id="chatbot-toggle-btn" class="bg-green-600 text-white rounded-full flex items-center justify-center p-4 focus:outline-none">
+            <svg id="chat-icon" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+            </svg>
+            <svg id="close-icon" class="w-8 h-8 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Lógica del carrusel
             const carouselItems = document.querySelectorAll('.carousel-item');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
             let currentIndex = 0;
 
             function showItem(index) {
-                // Ocultar todos los elementos del carrusel
                 carouselItems.forEach((item, i) => {
                     item.classList.add('hidden-carousel-item');
-                    // Pausar videos si están activos y reiniciar su tiempo
                     if (item.querySelector('video')) {
                         item.querySelector('video').pause();
-                        item.querySelector('video').currentTime = 0; // Reiniciar video al principio
+                        item.querySelector('video').currentTime = 0;
                     }
                 });
-
-                // Mostrar el elemento actual
                 carouselItems[index].classList.remove('hidden-carousel-item');
-                // Reproducir el video si el elemento actual es un video
                 if (carouselItems[index].querySelector('video')) {
                     carouselItems[index].querySelector('video').play();
                 }
             }
 
-            // Mostrar el primer elemento al cargar
             showItem(currentIndex);
 
             prevBtn.addEventListener('click', () => {
@@ -297,8 +583,207 @@
                 currentIndex = (currentIndex + 1) % carouselItems.length;
                 showItem(currentIndex);
             });
+            
+            // Lógica del Chatbot
+            const chatbotToggleBtn = document.getElementById('chatbot-toggle-btn');
+            const chatbotWindow = document.getElementById('chatbot-window');
+            const closeChatbotBtn = document.getElementById('close-chatbot-btn');
+            const chatIcon = document.getElementById('chat-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            const chatMessages = document.getElementById('chat-messages-new');
+            const userInput = document.getElementById('user-input-new');
+            const sendButton = document.getElementById('send-button-new');
+            
+            let chatHistory = [];
+            let isTyping = false;
+            
+            const pageContent = {
+                quienesSomos: `Que Onda Rapaz es un refugio comprometido con la rehabilitación, conservación, educación ambiental, rescate y liberación de aves rapaces. Nuestro objetivo principal es brindar una segunda oportunidad a estas aves que han sido rescatadas, están heridas o se encuentran en situación de riesgo.`,
+                equipo: `Nuestro equipo está compuesto por:
+                - Carlos Enrique Hernandez Vazquez (Presidente)
+                - Enrique Martin Hernandez Diaz (Vice Presidente)
+                - Estrella Karina Hernandez Vazquez (Tesorera)
+                - Mariana Aguirre Trejo (Coordinación de Vinculación Académica)
+                - Elena Avila Salinas (Coordinación de Operación)
+                - Karla Balderas Perez (Coordinación de Mariposario)
+                - Perla Tenorio Escandon (Coordinación de Educación Ambiental)
+                - Luis Torres Enriquez (Coordinación Digitalización y Sistemas)`,
+                embajadores: `Nuestros embajadores son aves que nos ayudan en nuestras actividades educativas y de conservación:
+                - Shadow: Un aguililla de harris, conocida por su comportamiento de caza cooperativa.
+                - Arquímedes: Un búho virginiano, uno de los búhos más grandes y poderosos de América.
+                - Ágatha: Una corvus corax (cuervo común), conocida por su notable inteligencia.`,
+                areas: `Nuestro refugio tiene varias áreas especializadas:
+                - Aldea: Zona de bienvenida y gestión.
+                - Cueva: Espacio de descanso y tranquilidad para las aves.
+                - Voladeros: Espacios amplios para que las aves practiquen el vuelo.
+                - Clínica: El corazón médico para la atención veterinaria.
+                - Mariposario: Espacio para proteger mariposas y educar sobre polinizadores.`,
+                contacto: `Puedes aportar a nuestra misión y saber más sobre nosotros. Contáctanos a través de:
+                - Correo electrónico: direccion@que-onda-rapaz.com
+                - Dirección del refugio: Av del Desierto #995 Col. Capulines, San Luis Potosí
+                - Redes sociales: Facebook, Instagram y TikTok.
+                - Para donar o ser voluntario, contacta por correo electrónico o redes sociales.
+                `,
+                generalInfo: `Qué Onda Rapaz es una fundación y refugio para aves rapaces. Buscamos darles una segunda oportunidad y educar a la comunidad sobre la fauna silvestre. Somos un equipo apasionado que trabaja en conservación, rescate y rehabilitación de aves.`
+            };
+
+            // Función para alternar la visibilidad del chatbot
+            function toggleChatbot() {
+                chatbotWindow.classList.toggle('visible');
+                chatIcon.classList.toggle('hidden');
+                closeIcon.classList.toggle('hidden');
+            }
+
+            // Escuchar el botón flotante para abrir/cerrar el chatbot
+            chatbotToggleBtn.addEventListener('click', toggleChatbot);
+            closeChatbotBtn.addEventListener('click', toggleChatbot);
+
+            // Función para añadir un mensaje al contenedor del chat
+            function addMessage(sender, text) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add(
+                    'rounded-xl',
+                    'p-3',
+                    'max-w-xs',
+                    'md:max-w-sm',
+                    'break-words',
+                    'whitespace-pre-wrap'
+                );
+                
+                if (sender === 'user') {
+                    messageDiv.classList.add('bg-blue-500', 'text-white', 'self-end');
+                    messageDiv.textContent = text;
+                } else {
+                    messageDiv.classList.add('bg-gray-300', 'text-gray-800', 'self-start');
+                    messageDiv.innerHTML = text.replace(/\n/g, '<br>');
+                }
+                
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // Función para mostrar y ocultar el indicador de carga
+            function toggleLoadingIndicator(show) {
+                if (show) {
+                    const loadingDiv = document.createElement('div');
+                    loadingDiv.id = 'loading-indicator';
+                    loadingDiv.classList.add('self-start', 'text-gray-500', 'p-3');
+                    loadingDiv.textContent = 'Escribiendo...';
+                    chatMessages.appendChild(loadingDiv);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                } else {
+                    const loadingDiv = document.getElementById('loading-indicator');
+                    if (loadingDiv) {
+                        loadingDiv.remove();
+                    }
+                }
+            }
+
+            // Función para manejar el envío de mensajes a la API de Gemini
+            async function sendMessage() {
+                if (isTyping) return;
+                const userMessage = userInput.value.trim();
+                if (userMessage === "") return;
+
+                isTyping = true;
+                userInput.value = "";
+                addMessage('user', userMessage);
+
+                toggleLoadingIndicator(true);
+
+                // Determinar el contexto relevante de la página
+                let context = pageContent.generalInfo;
+                const lowerCaseMessage = userMessage.toLowerCase();
+                
+                if (lowerCaseMessage.includes('shadow') || lowerCaseMessage.includes('embajador') || lowerCaseMessage.includes('arquímedes') || lowerCaseMessage.includes('ághata')) {
+                    context += `\n\n--- Información de Embajadores ---\n${pageContent.embajadores}`;
+                } else if (lowerCaseMessage.includes('equipo') || lowerCaseMessage.includes('coordinador') || lowerCaseMessage.includes('presidente') || lowerCaseMessage.includes('tesorera')) {
+                    context += `\n\n--- Información del Equipo ---\n${pageContent.equipo}`;
+                } else if (lowerCaseMessage.includes('somos') || lowerCaseMessage.includes('misión') || lowerCaseMessage.includes('objetivo') || lowerCaseMessage.includes('historia')) {
+                    context += `\n\n--- Información de Quiénes Somos ---\n${pageContent.quienesSomos}`;
+                } else if (lowerCaseMessage.includes('área') || lowerCaseMessage.includes('refugio') || lowerCaseMessage.includes('aldea') || lowerCaseMessage.includes('cueva') || lowerCaseMessage.includes('voladero') || lowerCaseMessage.includes('clínica') || lowerCaseMessage.includes('mariposario')) {
+                    context += `\n\n--- Información de Áreas del Refugio ---\n${pageContent.areas}`;
+                } else if (lowerCaseMessage.includes('contacto') || lowerCaseMessage.includes('aportar') || lowerCaseMessage.includes('donar') || lowerCaseMessage.includes('voluntario') || lowerCaseMessage.includes('redes') || lowerCaseMessage.includes('correo') || lowerCaseMessage.includes('ubicación') || lowerCaseMessage.includes('dirección')) {
+                    context += `\n\n--- Información de Contacto y Aportes ---\n${pageContent.contacto}`;
+                }
+
+                const prompt = `Eres un chatbot para el refugio de aves "Qué Onda Rapaz". Responde a la siguiente pregunta del usuario basándote ÚNICAMENTE en la información proporcionada. Si no encuentras la respuesta en el contexto, responde amablemente que no tienes esa información.
+                
+                --- Contexto de la página ---
+                ${context}
+                ---
+
+                Pregunta del Usuario: ${userMessage}`;
+                
+                let apiChatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+
+                const payload = { contents: apiChatHistory };
+                const apiKey = "";
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                let retryCount = 0;
+                const maxRetries = 5;
+                let response;
+                let success = false;
+
+                while (retryCount < maxRetries && !success) {
+                    try {
+                        response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (response.status === 429) {
+                            const delay = Math.pow(2, retryCount) * 1000;
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            retryCount++;
+                        } else if (!response.ok) {
+                            throw new Error(`Error HTTP: ${response.status}`);
+                        } else {
+                            success = true;
+                        }
+                    } catch (error) {
+                        console.error('Error al enviar la solicitud:', error);
+                        break;
+                    }
+                }
+
+                toggleLoadingIndicator(false);
+
+                if (success) {
+                    try {
+                        const result = await response.json();
+                        if (result.candidates && result.candidates.length > 0 &&
+                            result.candidates[0].content && result.candidates[0].content.parts &&
+                            result.candidates[0].content.parts.length > 0) {
+                            const botResponse = result.candidates[0].content.parts[0].text;
+                            addMessage('bot', botResponse);
+                        } else {
+                            addMessage('bot', 'Lo siento, no pude generar una respuesta. Por favor, inténtalo de nuevo.');
+                        }
+                    } catch (error) {
+                        console.error('Error al analizar la respuesta JSON:', error);
+                        addMessage('bot', 'Hubo un problema al procesar la respuesta. Inténtalo de nuevo.');
+                    }
+                } else {
+                    addMessage('bot', 'No se pudo conectar con el servidor después de varios intentos. Inténtalo más tarde.');
+                }
+
+                isTyping = false;
+            }
+
+            // Manejar el evento de clic en el botón de enviar
+            sendButton.addEventListener('click', sendMessage);
+
+            // Manejar el evento de presionar la tecla 'Enter' en el campo de entrada
+            userInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    sendMessage();
+                }
+            });
         });
     </script>
-
 </body>
 </html>
