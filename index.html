@@ -15,7 +15,6 @@
         }
         /* Estilos personalizados para el fondo del hero section */
         .hero-background {
-            /* Ruta de la imagen de fondo */
             background-image: url('Imagenes/QRO1.jpeg');
             background-size: cover;
             background-position: center;
@@ -40,43 +39,42 @@
         /* --- ESTILOS PARA LAS SECCIONES DE EMBAJADORES Y EQUIPO --- */
         .card-effect {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            border: 2px solid transparent; /* Borde transparente por defecto */
+            border: 2px solid transparent;
         }
         .card-effect:hover {
-            transform: translateY(-10px) scale(1.03); /* Efecto de "levantar" y agrandar */
+            transform: translateY(-10px) scale(1.03);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            border-color: #38a169; /* Borde verde al pasar el cursor */
+            border-color: #38a169;
         }
         .card-effect .card-image {
             transition: border-color 0.3s ease-in-out;
         }
         .card-effect:hover .card-image {
-            border-color: #38a169; /* Borde verde en la imagen al pasar el cursor */
+            border-color: #38a169;
         }
-        /* --- FIN DE ESTILOS DE EMBAJADORES Y EQUIPO --- */
         
         /* Estilos para los íconos de redes sociales */
         .social-icon-wrapper {
-            width: 4rem; /* Ancho fijo para el círculo */
-            height: 4rem; /* Alto fijo para el círculo */
+            width: 4rem;
+            height: 4rem;
             transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
-            border-radius: 9999px; /* Hace el fondo circular */
-            background-color: #e5e7eb; /* Color de fondo gris claro */
+            border-radius: 9999px;
+            background-color: #e5e7eb;
             display: flex;
             justify-content: center;
             align-items: center;
         }
         .social-icon-wrapper:hover {
-            transform: scale(1.1); /* Agrandar al pasar el cursor */
-            background-color: #38a169; /* Fondo verde al pasar el cursor */
+            transform: scale(1.1);
+            background-color: #38a169;
         }
         .social-icon-wrapper i {
-            font-size: 2.5rem; /* Tamaño del ícono */
-            color: #374151; /* Color del ícono gris oscuro */
+            font-size: 2.5rem;
+            color: #374151;
             transition: color 0.3s ease-in-out;
         }
         .social-icon-wrapper:hover i {
-            color: #ffffff; /* Color del ícono blanco al pasar el cursor */
+            color: #ffffff;
         }
 
         /* Estilos del chatbot flotante simplificados */
@@ -84,7 +82,7 @@
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            z-index: 1000; /* Asegura que esté por encima de todos los demás elementos */
+            z-index: 1000;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
@@ -107,13 +105,12 @@
             border-radius: 1rem;
             overflow: hidden;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            /* Ocultar y animar el chatbot */
             opacity: 0;
             visibility: hidden;
             transform: scale(0);
-            transform-origin: bottom right; /* El origen de la transformación es la esquina inferior derecha */
+            transform-origin: bottom right;
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
-            margin-bottom: 1rem; /* Añade un pequeño espacio entre la ventana y el botón */
+            margin-bottom: 1rem;
         }
         #chatbot-window.visible {
             opacity: 1;
@@ -125,9 +122,8 @@
             padding: 1rem;
             overflow-y: auto;
             background-color: #f3f4f6;
-            /* Estilo para la barra de desplazamiento */
-            scrollbar-width: thin; /* Firefox */
-            scrollbar-color: #a0a0a0 #f3f4f6; /* Firefox */
+            scrollbar-width: thin;
+            scrollbar-color: #a0a0a0 #f3f4f6;
         }
         .chat-messages::-webkit-scrollbar {
             width: 8px;
@@ -164,13 +160,13 @@
             flex-grow: 1;
             overflow-y: auto;
             padding: 1rem;
-            background-color: #ffffff; /* Fondo blanco para los mensajes */
+            background-color: #ffffff;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem; /* Espacio entre mensajes */
+            gap: 0.5rem;
         }
         .user-message-new {
-            background-color: #d1e7dd; /* Un verde suave */
+            background-color: #d1e7dd;
             padding: 0.5rem 1rem;
             border-radius: 1rem;
             align-self: flex-end;
@@ -178,7 +174,7 @@
             margin-left: auto;
         }
         .bot-message-new {
-            background-color: #f0f2f5; /* Un gris claro */
+            background-color: #f0f2f5;
             padding: 0.5rem 1rem;
             border-radius: 1rem;
             align-self: flex-start;
@@ -199,8 +195,8 @@
             #chatbot-window {
                 height: 70vh;
                 max-width: none;
-                width: calc(100vw - 2rem); /* Ocupa casi todo el ancho de la pantalla */
-                margin-bottom: 1rem; /* Espacio entre la ventana y el botón */
+                width: calc(100vw - 2rem);
+                margin-bottom: 1rem;
             }
         }
         /* Estilos para asegurar que los botones del carrusel estén en la parte superior */
@@ -423,10 +419,10 @@
                         </div>
 
                         <!-- Botones de navegación -->
-                        <button id="prevBtn" class="carousel-button absolute top-1/2 left-4 -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-3 rounded-full focus:outline-none hover:bg-opacity-75 transition-colors">
+                        <button id="prevBtn" class="carousel-button absolute top-1/2 left-4 -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-4 rounded-full focus:outline-none hover:bg-opacity-75 transition-colors text-xl font-bold">
                             &#9664;
                         </button>
-                        <button id="nextBtn" class="carousel-button absolute top-1/2 right-4 -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-3 rounded-full focus:outline-none hover:bg-opacity-75 transition-colors">
+                        <button id="nextBtn" class="carousel-button absolute top-1/2 right-4 -translate-y-1/2 bg-gray-800 bg-opacity-50 text-white p-4 rounded-full focus:outline-none hover:bg-opacity-75 transition-colors text-xl font-bold">
                             &#9654;
                         </button>
                     </div>
@@ -563,6 +559,7 @@
             let currentIndex = 0;
 
             function showItem(index) {
+                // Oculta todos los elementos del carrusel y pausa los videos
                 carouselItems.forEach((item, i) => {
                     item.classList.add('hidden-carousel-item');
                     if (item.querySelector('video')) {
@@ -570,6 +567,7 @@
                         item.querySelector('video').currentTime = 0;
                     }
                 });
+                // Muestra el elemento seleccionado y reproduce el video si lo hay
                 carouselItems[index].classList.remove('hidden-carousel-item');
                 if (carouselItems[index].querySelector('video')) {
                     carouselItems[index].querySelector('video').play();
@@ -724,11 +722,7 @@
 
                 const payload = { contents: apiChatHistory };
                 
-                // --------------------------------------------------------------------------------------------------------------------
-                // IMPORTANTE: DEBES PEGAR TU PROPIA CLAVE DE API EN EL LUGAR DE LAS COMILLAS ABAJO para que el chatbot funcione.
-                // Ve a Google AI Studio para obtenerla: https://aistudio.google.com/app/apikey
-                // --------------------------------------------------------------------------------------------------------------------
-                const apiKey = "AIzaSyBvZ5EtiBCnjM6EyOD-YOCAPpzGsYTMzgw";
+                const apiKey = "";
                 
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
@@ -797,5 +791,7 @@
     </script>
 </body>
 </html>
+
+
 
 
